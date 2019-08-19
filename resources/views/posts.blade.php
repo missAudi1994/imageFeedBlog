@@ -9,16 +9,15 @@
       @foreach ($posts as $post)
 
 			<div class="card mb-3 mt-4">
-  <img src="{{ asset("storage/$post->p_image") }}" >
+  <img src="{{ asset("storage/$post->image") }}" >
   <div class="card-body">
-    <h5 class="card-title">{{ $post->p_title }}</h5>
-    <p class="card-text">{{ $post->p_content }}</p>
+    <h5 class="card-title">{{ $post->title }}</h5>
+    <p class="card-text">{{ $post->content }}</p>
     <p>
-      <a href=" {{ url('editpost/' . $post->p_id) }}">Edit</a>
+      <a href=" {{ route('editpost' , $post->id) }}">Edit</a>
     </p>
-
     <p>
-      <a href=" {{ url('deletepost/' . $post->p_id) }}">Delete</a>
+      <a href=" {{ route('deletepost' , $post->id) }}">Delete</a>
     </p>
 
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>

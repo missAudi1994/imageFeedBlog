@@ -9,12 +9,13 @@ use App\Post;
 use Auth;
 use Image;
 
-class c_post extends Controller
+class PostController extends Controller
 {
     //
 
     public function showpost(){
     	$posts = Post::all();
+
     	return view("posts" , compact("posts")) ;
     }
 
@@ -32,10 +33,10 @@ class c_post extends Controller
            ]);
 
            $addpost =new Post;
-           $addpost->p_title   = request("title");
-           $addpost->p_content = request("content");
-           $addpost->p_user    = request("userid");
-          $addpost->p_image = $request->file('image')->store('/images','public');
+           $addpost->title   = request("title");
+           $addpost->content = request("content");
+           $addpost->user    = request("userid");
+          $addpost->image = $request->file('image')->store('/images','public');
            
            $addpost->save();
            return redirect('/posts');
@@ -53,10 +54,10 @@ class c_post extends Controller
 
     public function updatepost(Request $request , $id){
       $updatepost = Post::find($id);
-      $updatepost->p_title   = request("title");
-      $updatepost->p_content = request("content");
-      $updatepost->p_user    = request("userid");
-      $updatepost->p_image = $request->file('image')->store('/images','public');
+      $updatepost->title   = request("title");
+      $updatepost->content = request("content");
+      $updatepost->user    = request("userid");
+      $updatepost->image = $request->file('image')->store('/images','public');
       $updatepost->save();
       return redirect('/posts');
 

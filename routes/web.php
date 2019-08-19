@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 
-Route::get('/posts', 'c_post@showpost' );
-Route::get('/addpost', 'c_post@addpost' )->middleware("auth") ;
-Route::post('/insertpost', 'c_post@insertpost' )->middleware("auth");
-Route::get('/editpost/{id}', 'c_post@editpost' )->middleware("auth");
-Route::post('/updatepost/{id}', 'c_post@updatepost' )->middleware("auth");  
-Route::get('/deletepost/{id}', 'c_post@deletepost' )->middleware("auth");
+Route::get('/posts', 'PostController@showpost' )->name('posts');
+Route::get('/addpost', 'PostController@addpost' )->middleware("auth")->name('addpost') ;
+Route::post('/insertpost', 'PostController@insertpost' )->middleware("auth")->name('insertpost');
+Route::get('/editpost/{id}', 'PostController@editpost' )->middleware("auth")->name('editpost');
+Route::post('/updatepost/{id}', 'PostController@updatepost' )->middleware("auth")->name('updatepost');  
+Route::get('/deletepost/{id}', 'PostController@deletepost' )->middleware("auth")->name('deletepost');
 
 
 
@@ -29,8 +29,12 @@ Route::get('/deletepost/{id}', 'c_post@deletepost' )->middleware("auth");
 Route::get('/logout', function () {
     Auth::logout();
     return redirect('/posts');  // we use a special route with logout  which is redirect to redirect the user to another page instead of view
-});
+})->name('logout');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/',function(){
+return redirect('/login');
+
+});

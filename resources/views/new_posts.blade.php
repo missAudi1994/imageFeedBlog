@@ -6,7 +6,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8 mt-4">
-		<form action="{{ url('/insertpost') }} " method="POST" enctype="multipart/form-data">
+		<form action="{{ route('insertpost') }} " method="POST" enctype="multipart/form-data">
 			@csrf
 			<input type="hidden" name="userid"  value=" {{ Auth::user()->id }} ">
 			<div class="form-group row">
