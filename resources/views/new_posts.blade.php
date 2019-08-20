@@ -6,8 +6,11 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-8 mt-4">
+     
 		<form action="{{ route('insertpost') }} " method="POST" enctype="multipart/form-data">
+		     
 			@csrf
+        
 			<input type="hidden" name="userid"  value=" {{ Auth::user()->id }} ">
 			<div class="form-group row">
 				<label for="title" class="col-2">Title</label>
@@ -29,26 +32,36 @@
 
 			
               <input type="submit" class="btn btn-primary mt-3">
+         
             
 		</form>
 	</div>
 
     <div class="col-12">
-    	@foreach( $errors->all() as $err)
+    	
 
-    	  <div class="alert alert-danger mt-4">
-    	  	{{ $err }}
+        @if ($errors->any())  <!-- displaying the validation errors -->
+          <div class="alert alert-danger mt-4">
+          	<ul>
 
-    	  </div>
 
-          
+    	@foreach( $errors->all() as $eror)  
+
+    	  
+    	   <li>	{{ $eror }}</li>
+
 
     	@endforeach
-    	
+    	</ul>
+       </div>
+      @endif
 
     </div>
 
+	
+
 </div>
+
 
 
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use App\Post;
 use Auth;
 use Image;
+use Session;
 
 class PostController extends Controller
 {
@@ -25,21 +27,25 @@ class PostController extends Controller
     }
 
     public function insertpost(Request $request){
-          
-           $request->validate([
-              "content" => "required|min:4", 
-              "image" => "required",
 
-           ]);
+          $validator = validator::make($request->all(),[
+          'title' => 'required|max:100',
+          'content'=> 'required',
+           'image'=> 'required|mimes:jpeg,jpg,png|max:2000'
+          
+          ])->validate();
 
            $addpost =new Post;
            $addpost->title   = request("title");
            $addpost->content = request("content");
            $addpost->user    = request("userid");
-          $addpost->image = $request->file('image')->store('/images','public');
-           
+           $addpost->image = $request->file('image')->store('/images','public');
+
            $addpost->save();
-           return redirect('/posts');
+
+          Session::flash('success','Your post has now been published');
+
+           return redirect('/posts'); //here supposed to be a specific user posts "user profile"
        
 	
     }
@@ -59,6 +65,7 @@ class PostController extends Controller
       $updatepost->user    = request("userid");
       $updatepost->image = $request->file('image')->store('/images','public');
       $updatepost->save();
+       Session::flash('message','Your post has now been updated');
       return redirect('/posts');
 
     }
@@ -69,7 +76,7 @@ class PostController extends Controller
         
         $post = Post::findOrFail($id);
         $post->delete();
-        //dd($id);
+         Session::flash('remove','Your post has now been removed');
         return redirect('/posts');
     }
 
