@@ -32,8 +32,30 @@
             
 		</form>
 	</div>
-</div>
 
+
+
+</div>
+<div class="col-12">
+    	
+
+        @if ($errors->any())  <!-- displaying the validation errors -->
+          <div class="alert alert-danger mt-4">
+          	<ul>
+
+
+    	@foreach( $errors->all() as $eror)  
+
+    	  
+    	   <li>	{{ $eror }}</li>
+
+
+    	@endforeach
+    	</ul>
+       </div>
+      @endif
+
+    </div>
 
 
 @endsection

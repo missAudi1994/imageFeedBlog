@@ -52,17 +52,25 @@ class PostController extends Controller
 
 
     public function editpost($id){
-        
         $post = Post::findOrFail($id);
         //dd($id);
-        return view("editpost",['post'=>$post]);
+        return view("editpost",['post'=>$post]); 
+        
     }
 
     public function updatepost(Request $request , $id){
+      
+         $validator = validator::make($request->all(),[
+          'title' => 'required|max:100',
+          'content'=> 'required',
+           'image'=> 'required|mimes:jpeg,jpg,png|max:2000'
+          
+          ])->validate();
+
       $updatepost = Post::find($id);
       $updatepost->title   = request("title");
       $updatepost->content = request("content");
-      $updatepost->user    = request("userid");
+      //$updatepost->user    = request("userid");
       $updatepost->image = $request->file('image')->store('/images','public');
       $updatepost->save();
        Session::flash('message','Your post has now been updated');
