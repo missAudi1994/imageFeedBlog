@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->string("title")->nullable();
             $table->LongText("content");
             $table->LongText("image");  //the post image field
-            $table->bigInteger("user")->unsigned();
-            $table->foreign("user")->references("id")->on("users")->onDelete("cascade");
+            $table->bigInteger("user_id")->unsigned();
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Post;
+use App\User;
+
 use Auth;
 use Image;
 use Session;
@@ -17,9 +20,23 @@ class PostController extends Controller
 
     public function showpost(){
     	$posts = Post::all();
-
+       
     	return view("posts" , compact("posts")) ;
     }
+
+
+
+
+   public function showUserPosts($id){
+    $user= User::findOrFail($id);
+    $posts=Post::where('user_id','=',$user->id)->get();
+    return view("posts")->with(array("user" => $user, "posts" => $posts));
+
+   }
+
+
+
+
 
 
     public function addpost(){
@@ -38,11 +55,12 @@ class PostController extends Controller
            $addpost =new Post;
            $addpost->title   = request("title");
            $addpost->content = request("content");
-           $addpost->user    = request("userid");
+           $addpost->user_id    = auth()->id();
+
            $addpost->image = $request->file('image')->store('/images','public');
-
+          
            $addpost->save();
-
+           
           Session::flash('success','Your post has now been published');
 
            return redirect('/posts'); //here supposed to be a specific user posts "user profile"

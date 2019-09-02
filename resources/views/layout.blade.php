@@ -24,7 +24,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route('posts')}}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{ route('posts')}}">Timeline <span class="sr-only">(current)</span></a>
       </li>
 
       
@@ -42,7 +42,7 @@
       @else   <!-- if the user logged in then there is only logout option -->
 
       <li class="nav-item">
-        <a href="" class="nav-link">  {{ Auth::user()->name }} </a>
+        <a href=" {{ route('userposts' , Auth::user()->id) }} " class="nav-link">  {{ Auth::user()->name }} </a>
       </li> <!-- this line is for displaying the user name on the top of the page if he is logged in -->
 
       <li class="nav-item">
