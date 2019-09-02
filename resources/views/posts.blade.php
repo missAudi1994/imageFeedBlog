@@ -29,10 +29,10 @@
       @foreach ($posts as $post)
 
 			<div class="card mb-3 mt-4">
-  <img src="{{ asset("storage/$post->image") }}">
+  <img src="{{ asset("$post->image") }}">
   <div class="card-body">
     <h5 class="card-title">{{ $post->title }}</h5>
-    <p class="blog-post-meta"> By :{{ $post->user->name  }}</p>
+    <p class="blog-post-meta"> By :<a href="{{ route('userposts' , $post->user->id) }} " >{{ $post->user->name  }}</a></p>
     <p class="card-text">{{ $post->content }}</p>
 
 
