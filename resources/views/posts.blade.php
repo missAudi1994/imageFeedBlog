@@ -36,14 +36,14 @@
 
 
     <p>
-      @if (Auth::check() && $post->user == Auth::id()) <!-- only authorized user can edit and delete a post -->
+      @if (Auth::check() && $post->user->id == Auth::id()) <!-- only authorized user can edit and delete a post -->
       <a href=" {{ route('editpost' , $post->id) }}" >Edit</a>
       @endif
     </p>
   
 
     <p>
-      @if (Auth::check() && $post->user == Auth::id())
+      @if (Auth::check() && $post->user->id == Auth::id())
       <a onclick="return confirm('Are you sure you want to delete this post?')"  href=" {{ route('deletepost' , $post->id) }}">Delete</a>
       @endif
 
