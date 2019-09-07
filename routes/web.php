@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
+//Post Routes
+Route::get('/userposts/{id}','PostController@showUserPosts')->name('userposts');
 
 Route::get('/posts', 'PostController@showpost' )->name('posts');
 Route::get('/addpost', 'PostController@addpost' )->middleware("auth")->name('addpost') ;
@@ -25,10 +27,15 @@ Route::get('/deletepost/{id}', 'PostController@deletepost' )->middleware("auth")
 
 
 
+//Comment Routes
+Route::get('/showcomments/{id}', 'CommentController@showComment' )->name('comments');
+Route::post('/{post}/comments', 'CommentController@store')->name('addcomment');
+
+
 
 Route::get('/logout', function () {
     Auth::logout();
-    return redirect('/posts');  // we use a special route with logout  which is redirect to redirect the user to another page instead of view
+    return redirect('/posts');  
 })->name('logout');
 
 Auth::routes();
