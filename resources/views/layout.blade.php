@@ -2,47 +2,63 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title> </title>
+<title> Picgram </title>
 
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{asset('css/style.css') }}">
 <!-- <script src="{{asset('js/jquery-3.2.1.slim.min.js') }}"></script>
 <script src="{{asset('js/popper.min.js') }}"></script> -->
 <script src="{{asset('js/bootstrap.min.js') }}"></script>
+<style>
 
+
+body{
+  background-color:#f8f9fa;
+}
+
+
+</style>
 </head>
 <body>
 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{{ route('posts')}}">Hello World!</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg  navbar-light bg-light">
+  
+   <img src="{{ asset('logo.png') }}" width="90" height="auto" class="d-inline-block align-top" alt="">
+   <a class="navbar-brand" href="{{ route('posts')}}">
+   <h4 class="brand brand-name ">
+ 
+  Picgram </h4>
+  </a>
+   
+  
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ route('posts')}}">Timeline <span class="sr-only">(current)</span></a>
+      
+      <li class="nav-item ">
+        <a class="nav-link" href="{{ route('posts')}}" >Timeline <span class="sr-only">(current)</span></a>
       </li>
+     </ul>
 
       
 
       @guest  <!-- to make options if the user is not registerd -->
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/register') }}">Register</a>
+     <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item" >
+        <a  class="nav-link"  href="{{ url('/register') }}" >Get Started</a>
       </li>
-
-      <li class="nav-item">
+     
+      <li class="nav-item " >
         <a class="nav-link" href="{{ url('/login') }}">Login</a>
       </li>
-
+     </ul>
       @else   <!-- if the user logged in then there is only logout option -->
-
+      <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
-        <a href=" {{ route('userposts' , Auth::user()->id) }} " class="nav-link">  {{ Auth::user()->name }} </a>
+        <a href=" {{ route('userposts' , Auth::user()->id) }} " class="nav-link"> Welcome  {{ Auth::user()->name }} </a>
       </li> <!-- this line is for displaying the user name on the top of the page if he is logged in -->
 
       <li class="nav-item">
@@ -58,16 +74,40 @@
 
       
     </ul>
-    
+
   </div>
+
 </nav>
-
-
-
 
 
   @yield("content")
 
 
+
+
+
 </body>
+
+<style type="text/css">
+#footer {
+   position:fixed;
+   bottom:0;
+   width:100%;
+   height:50px;   /* Height of the footer */
+  }
+</style>
+
+
+<footer id="footer" class="py-2 bg-dark text-white-50">
+
+  <div class="footer-copyright text-center py-3">
+    <small>
+    &copy;2019 Picgram
+  </small>
+   
+  </div>
+ 
+
+</footer>
+
 </html>

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-
+//Post Routes
 Route::get('/userposts/{id}','PostController@showUserPosts')->name('userposts');
 
 Route::get('/posts', 'PostController@showpost' )->name('posts');
@@ -28,6 +28,7 @@ Route::get('/deletepost/{id}', 'PostController@deletepost' )->middleware("auth")
 
 
 //Comment Routes
+Route::get('/showcomments/{id}', 'CommentController@showComment' )->name('comments');
 Route::post('/{post}/comments', 'CommentController@store')->name('addcomment');
 
 
