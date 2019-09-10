@@ -2,7 +2,7 @@
 
 @section("content")
 
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-light" style="margin-bottom: 100px;">
 <div class="row">
 <div class="col-md-8 offset-md-2">
 
@@ -28,7 +28,7 @@
       
 
 <div class="card mb-3 mt-4">
-   <img class="card-img-top"src="{{ asset("$post->image") }}">
+   <img class="card-img-top"src="{{ asset("storage/$post->image") }}">
    
    <div class="card-body">
     <h5 class="card-title">{{ $post->title }}</h5>
@@ -72,7 +72,7 @@
             <strong>
               
                @if(isset($comment->user) )
-                 {{ $comment->created_at->diffForHumans()}} by <a href="{{ route('userposts' , $comment->user->id ) }} " > {{$comment->user->name }}</a> : &nbsp;
+                 {{ $comment->created_at->diffForHumans()}} by <a href="{{ route('userposts' , $comment->user->id ) }} " style="color: #17a2b8ad;" > {{$comment->user->name }}</a> : &nbsp;
        
                @else 
 
@@ -127,4 +127,3 @@
 
 
 @endsection
-

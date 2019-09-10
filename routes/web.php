@@ -28,14 +28,14 @@ Route::get('/deletepost/{id}', 'PostController@deletepost' )->middleware("auth")
 
 
 //Comment Routes
-Route::get('/showcomments/{id}', 'CommentController@showComment' )->name('comments');
+Route::get('/showcomments/{id}', 'CommentController@postComments' )->name('comments');
 Route::post('/{post}/comments', 'CommentController@store')->name('addcomment');
 
 
 
 Route::get('/logout', function () {
     Auth::logout();
-    return redirect('/posts');  
+    return redirect('/posts')->with('logout_message','You have been logged out');  
 })->name('logout');
 
 Auth::routes();

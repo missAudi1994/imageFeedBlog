@@ -3,6 +3,16 @@
 @section("content")
 
 <div class="container  bg-light">
+
+   
+   @if (session('logout_message'))
+       <div class="alert alert-success" role="alert">
+        {{ session('logout_message') }}
+      </div>
+    @endif 
+
+
+
   @if(Session::get('success'))
     <div class="alert alert-success" role="alert">
        <strong>Success:</strong> {{ Session::get('success') }}
@@ -20,8 +30,9 @@
        <strong>Success:</strong> {{ Session::get('remove') }}
     </div>
     @endif
+   
 
- <div class="row">
+ <div class="row" style="margin-bottom: 100px;">
   
   
   <div class="card-columns">
@@ -30,7 +41,7 @@
 <div class="card" >
 
   
-   <img class="card-img-top" src="{{ asset("$post->image") }}">
+   <img class="card-img-top" src="{{ asset("storage/$post->image") }}">
   <div class="card-body">
     <h5 class="card-title">
      <a href="{{ route('comments' , $post->id) }}" style="color: #212529;" > 
@@ -55,10 +66,7 @@
 
     </p>
   </div>
- {{--  <small class="text-muted">
-    
-    <a href="{{ route('comments' , $post->id) }}" style="color: #17a2b8ad;" >More...</a>
-  </small> --}}
+
 
   </div>
 </div>
@@ -68,11 +76,15 @@
 
    @endforeach
 
-</div>
-
-
 
 </div>
+
+  
+{{ $posts->links() }}
+
+
+</div>
+
 
 </div>
 
