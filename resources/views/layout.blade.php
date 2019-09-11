@@ -9,6 +9,7 @@
 <!-- <script src="{{asset('js/jquery-3.2.1.slim.min.js') }}"></script>
 <script src="{{asset('js/popper.min.js') }}"></script> -->
 <script src="{{asset('js/bootstrap.min.js') }}"></script>
+<style>
 
 <style>
 
@@ -16,6 +17,13 @@ body
 {
   background-color:#f8f9fa;
 }
+
+
+body{
+  background-color:#f8f9fa;
+}
+
+
 
 
 footer 
@@ -33,11 +41,14 @@ footer
 <body>
 
 <div class="container">
+
 <nav class="navbar navbar-expand-lg  navbar-light bg-light">
   
    <img src="{{ asset('logo.png') }}" width="90" height="auto" class="d-inline-block align-top" alt="">
    <a class="navbar-brand" href="{{ route('posts')}}">
+
    <h4 class="brand brand-name "> Picgram  </h4> </a>
+
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     
@@ -67,6 +78,7 @@ footer
       <li class="nav-item">
         <a href=" {{ route('userposts' , Auth::user()->id) }} " class="nav-link" style="color: black;"> Welcome  {{ Auth::user()->name }} </a>
       </li> 
+
 
       <li class="nav-item">
         <a class="nav-link" href="{{ route('addpost') }}">Create Post</a>
@@ -111,3 +123,4 @@ footer
 </footer>
 
 </html>
+

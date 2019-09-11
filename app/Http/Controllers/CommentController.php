@@ -20,8 +20,10 @@ class CommentController extends Controller
 
 
 
+
 public function store(Request $request,Post $post)
 {
+
 
    $this->validate(request(),['content' =>'required|min:2']);
 
@@ -37,8 +39,10 @@ public function store(Request $request,Post $post)
      'content' => $request->content,
      'user_id' => $userId,
      'post_id' => $post->id,
+
      ]);
        return back();
  }
 
 }
+

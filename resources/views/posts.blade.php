@@ -3,7 +3,6 @@
 @section("content")
 
 
-
 <div class="container  bg-light">
 
    
@@ -12,7 +11,6 @@
         {{ session('logout_message') }}
       </div>
     @endif 
-
 
 
   @if(Session::get('success'))
@@ -34,7 +32,9 @@
     @endif
    
 
+
  <div class="row" style="margin-bottom: 100px;">
+
   
   
   <div class="card-columns">
@@ -50,7 +50,9 @@
 {{ $post->title }}</h5>
      </a>
       
+
     <p class="blog-post-meta"> By : <a href="{{ route('userposts' , $post->user->id) }} "  style="color: #17a2b8ad;">{{ $post->user->name  }}</a></p>
+
     
   <div class="d-flex justify-content-between align-items-center">
     <div class="btn-group">
@@ -66,13 +68,14 @@
        <form action="{{ route('deletepost' , $post->id) }}" method="POST">
         @method('DELETE')
          @csrf
-           <button onclick="return confirm('Are you sure you want to delete this post?')" class="btn btn-sm btn-outline-secondary"> Delete </button>
-
+           <button onclick="return confirm('Are you sure you want to delete this post?')" class="btn btn-sm btn-outline-secondary"> Delete 
+           </button>
      </form>
       @endcan
 
     </p>
   </div>
+
 
 
   </div>
@@ -108,6 +111,3 @@
 
 
 @endsection
-
-
-

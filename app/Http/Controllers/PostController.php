@@ -18,10 +18,12 @@ class PostController extends Controller
 {
     //
 
+
     public function index(){
     $posts = Post::orderBy('created_at', 'desc')->paginate(10);
        
     return view("posts" , compact("posts")) ;
+
     }
 
 
@@ -30,6 +32,7 @@ class PostController extends Controller
    public function show($id){
     $user= User::findOrFail($id);
     $posts=Post::where('user_id','=',$user->id)->orderBy('created_at', 'desc')->paginate(10);
+
     return view("posts")->with(array("user" => $user, "posts" => $posts));
 
    }
@@ -40,6 +43,7 @@ class PostController extends Controller
     return view("new_posts");
     }
 
+  
     public function store(Request $request){
 
           $validator = validator::make($request->all(),[

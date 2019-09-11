@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 //Post Routes
+
 Route::resource('posts','PostController')->names([
  'show' => 'userposts',
  'index' => 'posts',
@@ -24,12 +25,12 @@ Route::resource('posts','PostController')->names([
  'edit' => 'editpost',
  'update' => 'updatepost',
  'destroy' => 'deletepost',
-
 ]);
 
 
 
 //Comment Routes
+
 Route::get('/showcomments/{id}', 'CommentController@show' )->name('comments');
 Route::post('/{post}/comments', 'CommentController@store')->name('addcomment');
 
