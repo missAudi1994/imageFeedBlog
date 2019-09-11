@@ -8,6 +8,7 @@ use Auth;
 class Post extends Model
 {
 
+
   
    protected $primaryKey = 'id';
 
@@ -16,9 +17,7 @@ class Post extends Model
         return $this->hasMany("App\Comment");
     }
 
-
-
-
+  
     public function user(){
         return $this->belongsTo("App\User");
     }
@@ -26,19 +25,6 @@ class Post extends Model
      
 
 
-    // public function addComment($content)
-    // {
-    //    //dd('i');
-    	
-        
-    //     Comment::create([
-    //  'content' => $content,
-    //  'user_id' => Auth::user()->id,
-    //  'post_id' => $this->id
-    //  ]);
-
-
-    // }
 
    
 

@@ -11,13 +11,15 @@ use Auth;
 class CommentController extends Controller
 {
     //
-    
-    public function showComment($id){
-        $post = Post::findOrFail($id);
-        
-        return view("comments",['post'=>$post]); 
-        
-    }
+
+  public function show($id){
+    $post= Post::findOrFail($id);
+    $comments=Comment::where('post_id','=',$post->id)->get();
+    return view("comments")->with(array("post" => $post, "comments" => $comments));
+  }
+
+
+
 
 public function store(Request $request,Post $post)
 {
@@ -25,23 +27,22 @@ public function store(Request $request,Post $post)
 
    $this->validate(request(),['content' =>'required|min:2']);
 
-    // $post->addComment(request('content'));
-     
-    // return back();
-   
     
-    if(Auth::user()){
+      if(Auth::user()){
         $userId=Auth::user()->id;
-      } else{
+      } 
+      else{
         $userId=null;
       }
-    
+     
       Comment::create([
      'content' => $request->content,
-     'user_id' => Auth::user()->id,
-     'post_id' => $post->id
+     'user_id' => $userId,
+     'post_id' => $post->id,
+
      ]);
        return back();
  }
 
 }
+

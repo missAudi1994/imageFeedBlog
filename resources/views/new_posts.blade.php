@@ -3,7 +3,9 @@
 @section("content")
 
 
-<div class="container-fluid">
+
+<div class="container-fluid" style="margin-bottom: 100px;">
+
 <div class="row">
 <div class="col-8 mt-4 offset-md-2">
      
@@ -47,8 +49,8 @@
 
     @foreach( $errors->all() as $eror)  
 
-     
-      <li>	{{ $eror }}</li>
+
+      <li>  {{ $eror }}</li>
 
 
     @endforeach

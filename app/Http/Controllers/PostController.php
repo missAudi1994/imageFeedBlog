@@ -18,32 +18,33 @@ class PostController extends Controller
 {
     //
 
-    public function showpost(){
-    	$posts = Post::orderBy('created_at', 'desc')->get();
+
+    public function index(){
+    $posts = Post::orderBy('created_at', 'desc')->paginate(10);
        
-    	return view("posts" , compact("posts")) ;
+    return view("posts" , compact("posts")) ;
+
     }
 
 
 
 
-   public function showUserPosts($id){
+   public function show($id){
     $user= User::findOrFail($id);
-    $posts=Post::where('user_id','=',$user->id)->get();
+    $posts=Post::where('user_id','=',$user->id)->orderBy('created_at', 'desc')->paginate(10);
+
     return view("posts")->with(array("user" => $user, "posts" => $posts));
 
    }
 
 
 
-
-
-
-    public function addpost(){
-    	return view("new_posts");
+    public function create(){
+    return view("new_posts");
     }
 
-    public function insertpost(Request $request){
+  
+    public function store(Request $request){
 
           $validator = validator::make($request->all(),[
           'title' => 'required|max:100',
@@ -65,18 +66,18 @@ class PostController extends Controller
 
            return redirect('/posts'); //here supposed to be a specific user posts "user profile"
        
-	
+
     }
 
 
-    public function editpost($id){
+    public function edit($id){
         $post = Post::findOrFail($id);
         //dd($id);
         return view("editpost",['post'=>$post]); 
         
     }
 
-    public function updatepost(Request $request , $id){
+    public function update(Request $request , $id){
       
          $validator = validator::make($request->all(),[
           'title' => 'required|max:100',
@@ -88,7 +89,6 @@ class PostController extends Controller
       $updatepost = Post::find($id);
       $updatepost->title   = request("title");
       $updatepost->content = request("content");
-      //$updatepost->user    = request("userid");
       $updatepost->image = $request->file('image')->store('/images','public');
       $updatepost->save();
        Session::flash('message','Your post has now been updated');
@@ -98,7 +98,7 @@ class PostController extends Controller
 
     
 
-    public function deletepost($id){
+    public function destroy($id){
         
         $post = Post::findOrFail($id);
         $post->delete();

@@ -2,7 +2,9 @@
 
 @section("content")
 
-<div class="container-fluid bg-light">
+
+<div class="container-fluid bg-light" style="margin-bottom: 100px;">
+
 <div class="row">
 <div class="col-md-8 offset-md-2">
 
@@ -33,23 +35,30 @@
    <div class="card-body">
     <h5 class="card-title">{{ $post->title }}</h5>
     
-     <p class="blog-post-meta"> By :<a href="{{ route('userposts' , $post->user->id) }} "  style="color: #17a2b8ad;">{{ $post->user->name  }}</a></p>
+
+     <p class="blog-post-meta"> By : <a href="{{ route('userposts' , $post->user->id) }} "  style="color: #17a2b8ad;">{{ $post->user->name  }}</a></p>
+
      
     <p class="card-text">{{ $post->content }}</p>
  
      <div class="btn-group">
    <p>
-      @if (Auth::check() && $post->user->id == Auth::id()) <!-- only authorized user can edit and delete a post -->
-      <a href=" {{ route('editpost' , $post->id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-      @endif
+      @can('edit',$post) <!-- only authorized user can edit and delete a post -->
+      <a href=" {{ route('editpost' , $post->id) }}" class="btn btn-sm btn-outline-secondary" >Edit</a>
+      @endcan
     </p>
   
 
     <p>
-      @if (Auth::check() && $post->user->id == Auth::id())
-      <a onclick="return confirm('Are you sure you want to delete this post?')"  href=" {{ route('deletepost' , $post->id) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
-      @endif
+      @can('destroy',$post)
+       <form action="{{ route('deletepost' , $post->id) }}" method="POST">
+        @method('DELETE')
+         @csrf
+         
+           <button onclick="return confirm('Are you sure you want to delete this post?')" class="btn btn-sm btn-outline-secondary"> Delete </button>
 
+     </form>
+      @endcan
     </p>
   </div>
 
@@ -72,7 +81,9 @@
             <strong>
               
                @if(isset($comment->user) )
-                 {{ $comment->created_at->diffForHumans()}} by <a href="{{ route('userposts' , $comment->user->id ) }} " > {{$comment->user->name }}</a> : &nbsp;
+
+                 {{ $comment->created_at->diffForHumans()}} by <a href="{{ route('userposts' , $comment->user->id ) }} " style="color: #17a2b8ad;" > {{$comment->user->name }}</a> : &nbsp;
+
        
                @else 
 
