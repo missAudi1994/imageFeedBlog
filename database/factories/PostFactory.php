@@ -10,7 +10,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
          'title' => $faker->word,
          'content' => $faker->text,
-         'image' => 'http://lorempixel.com/400/200/nature/' .rand(1,10),
+         'image' => $faker->image('default.jpg'),
          'user_id' => function() {
          	return factory(App\User::class)->create()->id;
          }

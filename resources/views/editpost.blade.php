@@ -3,10 +3,11 @@
 @section("content")
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom: 100px;">
 <div class="row">
-<div class="col-8 mt-4">
+<div class="col-8 mt-4 offset-md-2">
 <form action="{{ route('updatepost', $post->id) }} " method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="_method" value="PUT">
 @csrf
 <input type="hidden" name="userid"  value=" {{ Auth::user()->id or ''}} ">
 <div class="form-group row">

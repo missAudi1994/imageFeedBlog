@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     //
 
-  public function postComments($id){
+  public function show($id){
     $post= Post::findOrFail($id);
     $comments=Comment::where('post_id','=',$post->id)->get();
     return view("comments")->with(array("post" => $post, "comments" => $comments));
