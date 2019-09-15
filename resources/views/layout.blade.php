@@ -28,6 +28,7 @@ body{
 
 footer 
 {
+  z-index: 2;
    position:fixed;
    bottom:0;
    width:100%;
@@ -44,7 +45,7 @@ footer
 
 <nav class="navbar navbar-expand-lg  navbar-light bg-light">
   
-   <img src="{{ asset('logo.png') }}" width="90" height="auto" class="d-inline-block align-top" alt="">
+   <img src="{{ asset('image2vector.svg') }}" width="90" height="auto" class="d-inline-block align-top" alt="">
    <a class="navbar-brand" href="{{ route('posts')}}">
 
    <h4 class="brand brand-name "> Picgram  </h4> </a>

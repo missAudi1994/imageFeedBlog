@@ -102,6 +102,12 @@
     border-color: #ddd;
   }
 
+  .page-item.active .page-link
+  {
+        background-color: #5c448c;
+    border-color: #5c448c;
+  }
+
 </style>
 
 </div>
