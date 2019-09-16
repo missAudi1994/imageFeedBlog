@@ -25,14 +25,3 @@ class NewUserRegistered
     {
         $this->user = $user;
     }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name')* @return ;
-    }
-}
