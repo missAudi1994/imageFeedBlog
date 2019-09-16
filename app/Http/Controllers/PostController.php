@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 use App\Post;
 use App\User;
 
@@ -60,6 +61,7 @@ class PostController extends Controller
 
            $addpost->image = $request->file('image')->store('/images','public');
           
+
            $addpost->save();
            
           // Session::flash('success','Your post has now been published');

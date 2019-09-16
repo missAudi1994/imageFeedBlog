@@ -103,9 +103,6 @@ footer
   @yield("content")
 
 
-
-
-
 </body>
 
 
