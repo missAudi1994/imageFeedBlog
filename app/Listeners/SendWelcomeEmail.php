@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Notifications\SendWelcomeEmailNotification;
 use App\Events\NewUserRegistered;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,11 +30,8 @@ class SendWelcomeEmail
     public function handle(NewUserRegistered $event)
     {
         //send the welcome email to the user
-        $user = $event->user;
-        Mail::send('emails.welcome', ['user' => $user], function ($message) use ($user) {
-                $message->from('shahad@example.com', 'Shahad Ibrahim');
-                $message->subject('Welcome aboard '.$user->name.'!');
-                $message->to($user->email);
-        });
+        $event->user->notify(
+            new SendWelcomeEmailNotification()
+        );
     }
 }

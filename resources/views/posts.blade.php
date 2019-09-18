@@ -16,8 +16,8 @@
 
 <div class="card" >
 
-  
    <img class="card-img-top" src="{{ asset("$post->image") }}">
+
   <div class="card-body">
     <h5 class="card-title">
      <a href="{{ route('comments' , $post->id) }}" style="color: #212529;" > 
