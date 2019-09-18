@@ -11,6 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
          'title' => $faker->word,
          'content' => $faker->text,
          'image' => asset("logo.png"),
+
          'user_id' => function() {
          	return factory(App\User::class)->create()->id;
          }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+
 use App\Post;
 use App\User;
 
@@ -27,7 +28,7 @@ class PostController extends Controller
     }
 
 
-
+ 
 
    public function show($id){
     $user= User::findOrFail($id);
@@ -60,19 +61,21 @@ class PostController extends Controller
 
            $addpost->image = $request->file('image')->store('/images','public');
           
+
            $addpost->save();
            
-          Session::flash('success','Your post has now been published');
+          // Session::flash('success','Your post has now been published');
 
-           return redirect('/posts'); //here supposed to be a specific user posts "user profile"
+           return redirect('/posts')->with('success','Your post has now been published'); //here supposed to be a specific user posts "user profile"
        
 
     }
 
 
     public function edit($id){
+
         $post = Post::findOrFail($id);
-        //dd($id);
+         $this->authorize('edit',$post);
         return view("editpost",['post'=>$post]); 
         
     }
@@ -91,8 +94,8 @@ class PostController extends Controller
       $updatepost->content = request("content");
       $updatepost->image = $request->file('image')->store('/images','public');
       $updatepost->save();
-       Session::flash('message','Your post has now been updated');
-      return redirect('/posts');
+       // Session::flash('message','Your post has now been updated');
+      return redirect('/posts')->with('success','Your post has now been updated');
 
     }
 
@@ -101,9 +104,10 @@ class PostController extends Controller
     public function destroy($id){
         
         $post = Post::findOrFail($id);
+        $this->authorize('destroy',$post);
         $post->delete();
-         Session::flash('remove','Your post has now been removed');
-        return redirect('/posts');
+         // Session::flash('remove','Your post has now been removed');
+        return redirect('/posts')->with('success','Your post has now been removed');
     }
 
 }
